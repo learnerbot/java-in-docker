@@ -1,0 +1,42 @@
+group 'learnerbot'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+}
+
+dependencies {
+}
+
+jar {
+    baseName = "java-in-docker"
+    version =  "1.0.0"
+    manifest {
+        attributes("Main-Class": "hu.learnerbot.Main",
+                "Manifest-Version": version,
+                "Created-By": "LearnerBot")
+    }
+}
+
+task runapp(type: JavaExec) {
+    standardOutput = System.out
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs = []
+    main = "hu.learnerbot.Main"
+}
